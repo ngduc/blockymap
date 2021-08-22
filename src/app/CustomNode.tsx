@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { Handle } from 'react-flow-renderer';
+import { Handle, Position } from 'react-flow-renderer';
 
 const coinLogos = [
   {
@@ -84,7 +84,7 @@ export default memo(({ data, isConnectable }: any) => {
     <React.Fragment>
       <Handle
         type="target"
-        position="left"
+        position={Position.Left}
         style={{ background: '#555' }}
         onConnect={params => console.log('handle onConnect', params)}
         isConnectable={isConnectable}
@@ -117,7 +117,7 @@ export default memo(({ data, isConnectable }: any) => {
       </div>
       <Handle
         type="source"
-        position="right"
+        position={Position.Right}
         id="a"
         style={{ background: '#555' }}
         isConnectable={isConnectable}

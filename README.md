@@ -8,6 +8,8 @@ Users often have to document everything, sometimes forget how to transfer tokens
 So I had this idea and developed this application to help users visualize and map out everything,
 so that the user can see a bigger picture about the defi landscape and the tools they are using.
 
+Demo: https://blockymap-ngduc.vercel.app/
+
 <img src="./docs/screenshot-01.png" />
 
 In this tool, currently, user can do different things like: adding a new box, give it a name, each box can be an Exchange, a Wallet, or a Service.

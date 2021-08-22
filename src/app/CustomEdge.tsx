@@ -38,11 +38,10 @@ export default function CustomEdge({
     <React.Fragment>
       <path
         id={id}
-        style={style}
+        style={{ ...style, strokeWidth: 2 }}
         className="react-flow__edge-path"
         d={edgePath}
         markerEnd={markerEnd}
-        style={{ strokeWidth: 2 }}
       />
       {data.text && (
         <text style={{ fill: 'white' }} onClick={() => console.log('clicked')}>

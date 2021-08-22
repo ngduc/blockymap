@@ -12,7 +12,8 @@ import ReactFlow, {
   ArrowHeadType,
   Edge,
   Background,
-  useStoreState
+  useStoreState,
+  ConnectionMode
 } from 'react-flow-renderer';
 import CustomEdge from './CustomEdge';
 import {
@@ -259,8 +260,8 @@ const Main = () => {
     setElements(eles);
     setNodes(newNodes);
   };
-  const onNodeDoubleClick = (_: MouseEvent, node: Node) => {
-    const newNodes = [...nodes.filter(n => n.id !== node.id)];
+  const onNodeDoubleClick = (_: MouseEvent, node: any) => {
+    const newNodes = [...nodes.filter(n => n.id !== node?.id)];
     // removeNode(node);
     const eles = getElements(newNodes, edges, {
       elements: liveElements,
@@ -335,14 +336,14 @@ const Main = () => {
         zoomOnScroll={false}
         elements={elements}
         onElementClick={onElementClick}
-        onNodeDoubleClick={onNodeDoubleClick}
+        onNodeDoubleClick={(ev: any, node: any) => onNodeDoubleClick(ev, node)}
         onEdgeUpdate={onEdgeUpdate}
         onEdgeDoubleClick={onEdgeDoubleClick}
         onConnect={onConnect}
         snapToGrid={true}
         snapGrid={[10, 10]}
         edgeTypes={edgeTypes}
-        connectionMode="loose"
+        connectionMode={ConnectionMode.Loose}
         deleteKeyCode="Backspace"
         style={{ width: '100vw', height: '100vh' }}
       >
