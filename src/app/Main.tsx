@@ -23,6 +23,9 @@ import {
   saveNodes
 } from '../utils/dataUtil';
 import CustomNode from './CustomNode';
+import LogRocket from 'logrocket';
+LogRocket.init('9aapdz/blocky-map');
+
 
 import { Modal } from '../components/Base';
 
