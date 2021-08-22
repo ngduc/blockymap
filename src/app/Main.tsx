@@ -21,10 +21,15 @@ import {
   saveEdges,
   saveNodes
 } from '../utils/dataUtil';
+import CustomNode from './CustomNode';
 
 import { Modal } from '../components/Base';
 
-const BaseStyle = { fontSize: 12, width: 200 };
+const nodeTypes = {
+  customNode: CustomNode
+};
+
+const BaseStyle = { fontSize: 12, width: 220 };
 const BaseNode = {
   sourcePosition: 'right',
   targetPosition: 'left',
@@ -67,7 +72,9 @@ const getElements = (
         eles.push({
           ...base,
           id: node.id,
+          type: 'customNode',
           data: {
+            labelText: node.label,
             label: (
               <span
                 key={node.id}
@@ -275,13 +282,14 @@ const Main = () => {
 
   return (
     <div>
+
       {modalShowed && (
         <Modal
           title="Add Connection"
           content={
             <p>
               <h3>Label: (optional)</h3>
-              <input onChange={ev => setLabelInput(ev.target.value)} />
+              <input autoFocus onChange={ev => setLabelInput(ev.target.value)} />
             </p>
           }
           confirmLabel="Confirm"
@@ -320,6 +328,7 @@ const Main = () => {
         <span>Services</span>
       </div>
       <ReactFlow
+        nodeTypes={nodeTypes}
         nodesDraggable={true}
         nodesConnectable={true}
         zoomOnDoubleClick={false}
@@ -340,6 +349,9 @@ const Main = () => {
         <Background />
         <NodesDebugger />
       </ReactFlow>
+
+      <div style={{ position: 'absolute', right: 20, bottom: 20, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection.</div>
+
     </div>
   );
 };
