@@ -88,7 +88,7 @@ const getElements = (
                 onBlur={ev => {
                   if (onNodeLabelChanged) {
                     if (node.label !== ev.target.innerText) {
-                      onNodeLabelChanged(node.id, ev.target.innerText);
+                      onNodeLabelChanged(node.id, ev.target.innerText || 'New');
                     }
                   }
                 }}
@@ -286,6 +286,7 @@ const Main = () => {
 
   return (
     <div>
+      <div style={{ position: 'absolute', left: 20, top: 10, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection.</div>
 
       {modalShowed && (
         <Modal
@@ -320,7 +321,7 @@ const Main = () => {
           display: 'flex',
           justifyContent: 'space-between',
           width: 900,
-          marginTop: 20,
+          marginTop: 50,
           marginLeft: 80,
           marginRight: 80,
           fontSize: 18,
@@ -354,7 +355,6 @@ const Main = () => {
         <NodesDebugger />
       </ReactFlow>
 
-      <div style={{ position: 'absolute', right: 20, bottom: 20, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection.</div>
 
     </div>
   );
