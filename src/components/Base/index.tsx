@@ -71,31 +71,17 @@ type DropdownProps = BaseProps & {
   label?: React.ReactElement | string;
   itemClassName?: string;
 };
-export const Dropdown = ({
-  className,
-  label = 'label',
-  itemClassName,
-  children,
-  ...others
-}: DropdownProps) => {
+export const Dropdown = ({ className, label = 'label', itemClassName, children, ...others }: DropdownProps) => {
   return (
     <div className={className} {...others}>
       <div className={`${styles.dropdown} inline-block relative`}>
         <button className="py-2 px-4 rounded inline-flex items-center rounded-md border border-gray-300">
           <span className="mr-1">{label}</span>
-          <svg
-            className="fill-current h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
+          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{' '}
           </svg>
         </button>
-        <ul
-          className={`${
-            styles.dropdownMenu
-          } absolute hidden text-gray-700 pt-1`}
-        >
+        <ul className={`${styles.dropdownMenu} absolute hidden text-gray-700 pt-1`}>
           {React.Children.map(children, (child: any) => (
             <li className={itemClassName}>
               <span className="rounded-b bg-gray-100 hover:bg-gray-300 py-2 px-4 block whitespace-no-wrap cursor-pointer">
@@ -118,14 +104,7 @@ export const Spinner = ({ className, ...others }: BaseProps) => (
     viewBox="0 0 24 24"
     {...others}
   >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    />
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
     <path
       className="opacity-75"
       fill="currentColor"
@@ -175,9 +154,7 @@ export const Accordion = ({
             </div>
           </button>
           <div
-            className={`relative overflow-hidden max-h-0 ${
-              openCount.current > 1 ? 'transition-all duration-700' : ''
-            }`}
+            className={`relative overflow-hidden max-h-0 ${openCount.current > 1 ? 'transition-all duration-700' : ''}`}
             x-ref="container1"
             style={{ maxHeight: open ? 200 : 0 }}
           >
@@ -221,25 +198,17 @@ export const Modal = ({
           aria-hidden="true"
           onClick={onCancel}
         />
-        <span
-          className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-        >
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
           &#8203;
         </span>
 
         <div
-          className={`${
-            styles.modalMain
-          } rp-modal inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full`}
+          className={`${styles.modalMain} rp-modal inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full`}
         >
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="">
               <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
-                <h3
-                  className="text-lg leading-6 font-medium text-gray-900"
-                  id="modal-title"
-                >
+                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                   {title || 'Title'}
                 </h3>
                 <div className="mt-2">{content || 'Content'}</div>
@@ -287,11 +256,7 @@ export const Toast = ({
   ...others
 }: ToastProps) => {
   const svgIcon = icon || (
-    <svg
-      className="h-6 w-6 text-teal mr-4"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-    >
+    <svg className="h-6 w-6 text-teal mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
       <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
     </svg>
   );
@@ -305,20 +270,13 @@ export const Toast = ({
   const timerRef = React.useRef(0);
   React.useEffect(() => {
     if ((autoDismiss || 0) > 0) {
-      timerRef.current = setTimeout(
-        () => (onDismiss ? onDismiss() : ''),
-        autoDismiss
-      );
+      timerRef.current = setTimeout(() => (onDismiss ? onDismiss() : ''), autoDismiss);
     }
     return () => clearTimeout(timerRef.current);
   }, []);
 
   return (
-    <div
-      className={`fixed bottom-4 right-4 w-5/6 md:w-full max-w-sm ${cn} ${className}`}
-      role="alert"
-      {...others}
-    >
+    <div className={`fixed bottom-4 right-4 w-5/6 md:w-full max-w-sm ${cn} ${className}`} role="alert" {...others}>
       <div className="flex" onClick={onDismiss}>
         {svgIcon}
         <div>
@@ -373,23 +331,11 @@ export const Field = ({
 };
 
 // <Tooltip content="Email">...</Tooltip>
-export const Tooltip = ({
-  content,
-  className,
-  children
-}: BaseProps & { content: any; children: any }) => {
+export const Tooltip = ({ content, className, children }: BaseProps & { content: any; children: any }) => {
   return (
-    <div
-      className={`relative inline-flex flex flex-col items-center ${
-        styles.group
-      } ${className}`}
-    >
+    <div className={`relative inline-flex flex flex-col items-center ${styles.group} ${className}`}>
       {children}
-      <div
-        className={`absolute bottom-0 flex flex-col items-center hidden mb-10 ${
-          styles.groupHover
-        }`}
-      >
+      <div className={`absolute bottom-0 flex flex-col items-center hidden mb-10 ${styles.groupHover}`}>
         <span className="relative z-10 p-2 text-xs leading-none text-white whitespace-no-wrap rounded-md bg-black shadow-lg">
           {content}
         </span>
@@ -415,10 +361,7 @@ export const ProgressBar = ({
   const pct = (value / total) * 100;
   return (
     <div className={styles.progressBar} style={{ ...totalStyle }}>
-      <div
-        className={styles.progressBar}
-        style={{ width: `${pct}%`, backgroundColor: '#00c300', ...valueStyle }}
-      />
+      <div className={styles.progressBar} style={{ width: `${pct}%`, backgroundColor: '#00c300', ...valueStyle }} />
     </div>
   );
 };

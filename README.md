@@ -8,7 +8,7 @@ Users often have to document everything, sometimes forget how to transfer tokens
 So I had this idea and developed this application to help users visualize and map out everything,
 so that the user can see a bigger picture about the defi landscape and the tools they are using.
 
-Demo: https://blockymap-ngduc.vercel.app/
+Demo: https://blockymap.vercel.app
 
 <img src="./docs/screenshot-01.png" />
 

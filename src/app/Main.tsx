@@ -16,12 +16,7 @@ import ReactFlow, {
   ConnectionMode
 } from 'react-flow-renderer';
 import CustomEdge from './CustomEdge';
-import {
-  initialEdges,
-  initialNodes,
-  saveEdges,
-  saveNodes
-} from '../utils/dataUtil';
+import { initialEdges, initialNodes, saveEdges, saveNodes } from '../utils/dataUtil';
 import CustomNode from './CustomNode';
 import LogRocket from 'logrocket';
 LogRocket.init('9aapdz/blocky-map');
@@ -64,7 +59,7 @@ const getElements = (
   for (let col = 0; col <= 2; col = col + 1) {
     let count = 0;
     nodesArr
-      .filter(item => item.type === col)
+      .filter((item) => item.type === col)
       .forEach((node, idx) => {
         let base = { ...BaseNode };
         if (node.type === 1) {
@@ -84,7 +79,7 @@ const getElements = (
                 contentEditable={true}
                 suppressContentEditableWarning={true}
                 data-label={node.label}
-                onBlur={ev => {
+                onBlur={(ev) => {
                   if (onNodeLabelChanged) {
                     if (node.label !== ev.target.innerText) {
                       onNodeLabelChanged(node.id, ev.target.innerText || 'New');
@@ -120,8 +115,8 @@ const getElements = (
 
   // prepare for saving:
   // console.log('elements', elements);
-  (elements || []).forEach(ele => {
-    const node = nodesArr.find(n => n.id === ele.id);
+  (elements || []).forEach((ele) => {
+    const node = nodesArr.find((n) => n.id === ele.id);
     if (node && ele.__rf) {
       node.position = ele.__rf.position;
     }
@@ -139,7 +134,7 @@ const Main = () => {
   const onNodeLabelChanged = (id, newLabel) => {
     console.log('id', id, newLabel);
     const newNodes = [...nodes];
-    const lastNode = newNodes.find(item => item.id === id);
+    const lastNode = newNodes.find((item) => item.id === id);
     lastNode.label = newLabel;
     const eles = getElements(newNodes, edges, {
       elements,
@@ -171,10 +166,10 @@ const Main = () => {
   // gets called after end of edge gets dragged to another source or target
   const onEdgeUpdate = (oldEdge, newConnection) => {
     console.log('newConnection', newConnection);
-    return setElements(els => updateEdge(oldEdge, newConnection, els));
+    return setElements((els) => updateEdge(oldEdge, newConnection, els));
   };
 
-  const onConnect = params => {
+  const onConnect = (params) => {
     if (params.source === params.target) {
       return;
     }
@@ -210,16 +205,14 @@ const Main = () => {
     setElements(eles);
     setEdges(newEdges);
   };
-  const removeNode = nodeToRemove => {
+  const removeNode = (nodeToRemove) => {
     console.log('removeNode called', nodeToRemove);
     setElements(removeElements([nodeToRemove], elements));
   };
   const onEdgeDoubleClick = (ev, edge: Edge) => {
     console.log('edge', edges);
     let newEdges = [...edges];
-    newEdges = newEdges.filter(
-      e => e.source !== edge.source || e.target !== edge.target
-    );
+    newEdges = newEdges.filter((e) => e.source !== edge.source || e.target !== edge.target);
     console.log('newEdges', newEdges);
     // setElements(removeElements([edge], elements));
     const eles = getElements(nodes, newEdges, {
@@ -263,7 +256,7 @@ const Main = () => {
     setNodes(newNodes);
   };
   const onNodeDoubleClick = (_: MouseEvent, node: any) => {
-    const newNodes = [...nodes.filter(n => n.id !== node?.id)];
+    const newNodes = [...nodes.filter((n) => n.id !== node?.id)];
     // removeNode(node);
     const eles = getElements(newNodes, edges, {
       elements: liveElements,
@@ -278,14 +271,17 @@ const Main = () => {
   // }, []);
 
   const NodesDebugger = () => {
-    const nodes = useStoreState(state => state.nodes);
+    const nodes = useStoreState((state) => state.nodes);
     setLiveElements(nodes); // [ node has live node.__rf.position ]
     return null;
   };
 
   return (
     <div>
-      <div style={{ position: 'absolute', left: 20, top: 10, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection - Rename in the URL to create a new diagram.</div>
+      <div style={{ position: 'absolute', left: 20, top: 10, padding: 5, color: '#777' }}>
+        TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection - Rename in the URL to
+        create a new diagram.
+      </div>
 
       {modalShowed && (
         <Modal
@@ -293,7 +289,7 @@ const Main = () => {
           content={
             <p>
               <h3>Label: (optional)</h3>
-              <input autoFocus onChange={ev => setLabelInput(ev.target.value)} />
+              <input autoFocus onChange={(ev) => setLabelInput(ev.target.value)} />
             </p>
           }
           confirmLabel="Confirm"
@@ -302,7 +298,7 @@ const Main = () => {
             setModalShowed(false);
 
             const newEdges = [...edges];
-            const lastEdge = newEdges.find(item => item.id === lastId);
+            const lastEdge = newEdges.find((item) => item.id === lastId);
             lastEdge.text = labelInput;
             console.log('newEdges', newEdges);
             const eles = getElements(nodes, newEdges, {
@@ -353,8 +349,6 @@ const Main = () => {
         <Background />
         <NodesDebugger />
       </ReactFlow>
-
-
     </div>
   );
 };
