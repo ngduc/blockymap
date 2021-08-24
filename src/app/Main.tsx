@@ -26,7 +26,6 @@ import CustomNode from './CustomNode';
 import LogRocket from 'logrocket';
 LogRocket.init('9aapdz/blocky-map');
 
-
 import { Modal } from '../components/Base';
 
 const nodeTypes = {
@@ -286,7 +285,7 @@ const Main = () => {
 
   return (
     <div>
-      <div style={{ position: 'absolute', left: 20, top: 10, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection.</div>
+      <div style={{ position: 'absolute', left: 20, top: 10, padding: 5, color: '#777' }}>TIPS: - Drag and drop to connect boxes - Double click to delete a box or connection - Rename in the URL to create a new diagram.</div>
 
       {modalShowed && (
         <Modal

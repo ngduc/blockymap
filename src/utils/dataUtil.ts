@@ -1,4 +1,17 @@
-export const initialNodes = JSON.parse(localStorage.getItem('nodes')) || [
+import { parse } from 'query-string';
+
+const { id: idFromUrl } = parse(window.location.search);
+
+export const loadNodes = () => {
+  if (!idFromUrl) {
+    window.location.href = '/?id=name';
+    return {};
+  }
+  const str = localStorage.getItem(idFromUrl + '-nodes');
+  return JSON.parse(str);
+}
+
+export const initialNodes = loadNodes() || [
     {
       id: 'Coinbase',
       label: 'Coinbase',
@@ -21,7 +34,7 @@ export const initialNodes = JSON.parse(localStorage.getItem('nodes')) || [
     }
   ];
   
-  export const initialEdges = JSON.parse(localStorage.getItem('edges')) || [
+  export const initialEdges = JSON.parse(localStorage.getItem(idFromUrl + '-edges')) || [
     {
       source: 'Coinbase',
       target: 'Ethereum'
@@ -32,12 +45,14 @@ export const initialNodes = JSON.parse(localStorage.getItem('nodes')) || [
   let savingEdges = false;
   
   export function saveNodes(nodes) {
+    
+
     if (savingNodes) {
       return;
     }
     savingNodes = true;
     console.log('--- saving nodes', nodes);
-    localStorage.setItem('nodes', JSON.stringify(nodes));
+    localStorage.setItem(idFromUrl + '-nodes', JSON.stringify(nodes));
     setTimeout(() => (savingNodes = false), 100);
   }
   
@@ -47,7 +62,7 @@ export const initialNodes = JSON.parse(localStorage.getItem('nodes')) || [
     }
     savingEdges = true;
     console.log('--- saving edges', edges);
-    localStorage.setItem('edges', JSON.stringify(edges));
+    localStorage.setItem(idFromUrl + '-edges', JSON.stringify(edges));
     setTimeout(() => (savingEdges = false), 100);
   }
   
